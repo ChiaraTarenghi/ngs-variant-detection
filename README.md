@@ -41,7 +41,7 @@ flowchart TD
         L --> M
         M --> N[MultiQC Report (HTML)]
     end
-
+```
 
 
 🗂 Project layout
