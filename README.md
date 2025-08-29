@@ -14,34 +14,20 @@ Containers: **BWA-MEM2, Samtools, Picard, BCFtools, MultiQC** (BioContainers on 
 
 > Mermaid diagram (rendered by GitHub)
 
-```mermaid
 flowchart TD
-    subgraph QC
-        A[FASTQ (R1/R2)] --> B[FastQC]
-    end
+  A[FASTQ R1/R2] --> B[FastQC]
+  B --> C[BWA-MEM2]
+  C --> D[SAMtools sort]
+  D --> E[Picard MarkDuplicates]
+  E --> F[bcftools mpileup]
+  F --> G[bcftools call]
+  G --> H[bcftools norm]
+  H --> I[bcftools filter]
+  I --> J[bcftools +fill-tags]
+  B --> M[MultiQC]
+  J --> M
 
-    subgraph Alignment
-        A --> C[BWA-MEM2 Alignment]
-        C --> D[SAMtools Sort]
-        D --> E[Picard MarkDuplicates]
-        E --> F[BAM marked & indexed]
-    end
 
-    subgraph VariantCalling
-        F --> G[bcftools mpileup]
-        G --> H[bcftools call]
-        H --> I[bcftools norm]
-        I --> J[bcftools filter]
-        J --> K[bcftools annotate]
-    end
-
-    subgraph StatsAndReport
-        K --> L[bcftools stats]
-        B --> M[MultiQC]
-        L --> M
-        M --> N[MultiQC Report (HTML)]
-    end
-```
 
 🗂 Project layout
 .
