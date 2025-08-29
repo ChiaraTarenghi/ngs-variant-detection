@@ -15,24 +15,33 @@ Containers: **BWA-MEM2, Samtools, Picard, BCFtools, MultiQC** (BioContainers on 
 > Mermaid diagram (rendered by GitHub)
 
 ```mermaid
-flowchart LR
-  A[FASTQ R1/R2] --> B[FastQC]
-  A --> C[BWA-MEM2]
-  C --> D[Samtools sort]
-  D --> E[Picard MarkDuplicates]
-  E --> F[bcftools mpileup + call]
-  F --> G[bcftools norm]
-  G --> H[bcftools filter]
-  H --> I[bcftools +fill-tags]
-  H --> J[bcftools stats]
-  B --> K[MultiQC]
-  J --> K
-  subgraph Outputs
-    E -.-> BAM[BAM (marked + index)]
-    H -.-> VCF1[VCF (filtered)]
-    I -.-> VCF2[VCF (annotated)]
-    K -.-> HTML[MultiQC report]
-  end
+flowchart TD
+    subgraph QC
+        A[FASTQ (R1/R2)] --> B[FastQC]
+    end
+
+    subgraph Alignment
+        A --> C[BWA-MEM2 Alignment]
+        C --> D[SAMtools Sort]
+        D --> E[Picard MarkDuplicates]
+        E --> F[BAM marked & indexed]
+    end
+
+    subgraph VariantCalling
+        F --> G[bcftools mpileup]
+        G --> H[bcftools call]
+        H --> I[bcftools norm]
+        I --> J[bcftools filter]
+        J --> K[bcftools annotate]
+    end
+
+    subgraph StatsAndReport
+        K --> L[bcftools stats]
+        B --> M[MultiQC]
+        L --> M
+        M --> N[MultiQC Report (HTML)]
+    end
+
 
 🗂 Project layout
 .
@@ -153,6 +162,3 @@ MIT — see LICENSE (add your preferred license)
 
 Chiara Tarenghi — Biomedical Science & Biomedical Engineering
 Feedback and PRs are welcome!
-
-
-
