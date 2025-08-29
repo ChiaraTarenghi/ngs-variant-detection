@@ -14,6 +14,7 @@ Containers: **BWA-MEM2, Samtools, Picard, BCFtools, MultiQC** (BioContainers on 
 
 > Mermaid diagram (rendered by GitHub)
 
+```mermaid
 flowchart TD
   A[FASTQ R1/R2] --> B[FastQC]
   B --> C[BWA-MEM2]
@@ -26,7 +27,7 @@ flowchart TD
   I --> J[bcftools +fill-tags]
   B --> M[MultiQC]
   J --> M
-
+```
 
 
 🗂 Project layout
