@@ -43,6 +43,7 @@ flowchart TD
     end
 
 
+
 🗂 Project layout
 .
 ├── main_final.nf            # pipeline (DSL2)
