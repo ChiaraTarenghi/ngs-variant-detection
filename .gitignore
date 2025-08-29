@@ -1,0 +1,24 @@
+# Nextflow work dirs
+work/
+work_local/
+results*/
+*.html
+*.txt
+*.tsv
+*.log
+
+# Backup / temporanei
+*.bak
+*.old
+*.bad
+
+# Index/regenerable
+*.fai
+*.fasta.*
+*.dict
+*.bwt*
+*.amb
+*.ann
+*.pac
+*.sa
+
